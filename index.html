@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Ballerina Static</title>
+</head>
+<body>
+    <canvas
+    style="background-color: orange" width="1425" height="790" id="myCanvas"
+    >
+
+    </canvas>
+    <script>
+        const {width,height}=myCanvas;
+        const CANVAS_WIDTH = myCanvas.width;
+        const CANVAS_HEIGHT = myCanvas.height;
+
+
+        const ctx = myCanvas.getContext("2d");
+
+        // ctx.fillStyle ="white";
+        // ctx.fillRect(0,0,width,height);
+
+        let paused = false;
+        myCanvas.addEventListener("click",()=>{
+            paused =!paused;
+            if(!paused){
+                animate();
+                video.play();
+            }else{
+                video.pause();
+            }
+        });
+
+        const video = document.createElement("video");
+        video.src = "vid.mp4";
+        video.muted = true;
+        video.loop =true;
+        video.play();
+
+        video.addEventListener("loadeddata",()=>{
+            // myCanvas.width = video.videoWidth;
+            // myCanvas.height = video.videoHeight;
+
+         animate();
+        });
+
+        function animate(){
+        const {width,height}=myCanvas;
+
+        const oldImageData = ctx.getImageData(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
+        const oldData = oldImageData.data;
+
+        // ctx.fillStyle ="white";
+        // ctx.fillRect(0,0,width,height);
+        // ctx.fillStyle="black";
+
+        // const radius = 100;
+        // const percent = Math.sin(Date.now()/1000)**2;
+        // const x = lerp(radius , (width -radius) ,percent);
+        // const y = height/2;
+
+        // ctx.beginPath();
+        // ctx.arc(x,y,radius,0,2*Math.PI);
+        // ctx.fill();
+
+        ctx.drawImage(video,0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
+
+        const newImageData = ctx.getImageData(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
+        const newData = newImageData.data;
+
+        for(let i=0;i<newData.length;i+=4){
+            if(newData[i]==0){
+                const randBW = Math.random() >0.5 ? 255 : 0;
+                newData[i] = randBW;
+                newData[i+1] = randBW;
+                newData[i+2]= randBW;
+            }else{
+                newData[i] = oldData[i];
+                newData[i+1] = oldData[i+1];
+                newData[i+2] = oldData[i+2];
+                
+            }
+        }
+
+        ctx.putImageData(newImageData,0,0);
+        if(!paused){
+            requestAnimationFrame(animate);
+        }
+        
+        }
+        // function lerp(a,b,t){
+        //     return a+(b-a)*t;
+        // };
+    </script>
+</body>
+</html>
