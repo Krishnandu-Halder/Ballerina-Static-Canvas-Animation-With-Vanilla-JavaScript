@@ -5,7 +5,7 @@ This project demonstrates a creative canvas animation using HTML5 `<canvas>` and
 ---
 ## 🎬 Preview
 
-![Canvas Animation Preview](/Preview.mp4)
+![Canvas Animation Preview](./Preview.mp4)
 
 ---
 
