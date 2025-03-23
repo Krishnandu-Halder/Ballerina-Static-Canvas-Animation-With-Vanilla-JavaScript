@@ -3,9 +3,10 @@
 This project demonstrates a creative canvas animation using HTML5 `<canvas>` and a video element. The animation displays a video on the canvas and applies a unique static effect by preserving old frames and applying a black-and-white noise effect where the new frame pixels are black.
 
 ---
-## 🎬 Preview
+## 🎬 Project Preview
 
-![Canvas Animation Preview](./Preview.mp4)
+📺 [Click to Watch the Preview Video](https://drive.google.com/file/d/1voGv5yus2lkEmtNWyl9G1dK9YMUsOSHh/view?usp=drive_link)
+
 
 ---
 
